@@ -1,0 +1,42 @@
+@model List<Customer>
+@{
+  Layout="~/Views/Shared/_Layout.cshtml";
+ } 
+
+  <h3>Customer List</h3>
+  <paragraph short-description="detective/genius"></paragraph>
+  <div class="row">
+    <div class="col-4">
+      @* <partial name="_NewsPartial" model="NewsContext.List"/> *@
+      @await Component.InvokeAsync("News", new{@color="blue"})
+    </div>
+    <div class="col-8">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach(var item in Model)
+          {
+            <tr>
+              <td>@item.FirstName</td>
+              <td>@item.LastName</td>
+              <td>@item.Age</td>
+              <td>
+                <a asp-action="Update" asp-controller="Home" asp-route-id="@item.Id" >Update</a>
+                <a asp-action="Remove" asp-controller="Home" asp-route-id="@item.Id" >Remove</a>
+              </td>
+            </tr>
+          } 
+        </tbody>
+        </table>
+        <a asp-action="Create" asp-controller="Home">New User</a>
+    </div>
+  </div>
+
+
